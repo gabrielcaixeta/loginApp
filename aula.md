@@ -1,3 +1,31 @@
+Criar um projeto firebase no [Firebase console](https://console.firebase.google.com/).
+- dê um nome para o app, selecione uma região e crie o projeto;
+- Acesse a sessão de `Authentication` e habilite o método de autenticação `Enmail/password`.
+
+--- 
+
+```bash
+npx create-expo-app loginApp -t default
+cd ./loginApp
+
+# remove o app padrão criado e deixa o projeto zerado.
+./scripts/reset-project.js
+
+# instala as dependências de autenticação do react
+npx expo install @react-native-firebase/app @react-native-firebase/auth
+# instalar as dependências de configurações nativas do app
+npx expo install expo-build-properties
+
+```
+
+---
+
+Configuração do `app.json`.
+Os arquivos `GoogleService-Info.plist` and `google-services.json` devem ser baixados
+do **Firebase console**. 
+🚩 Qualquer alteração nas configurações esses dois arquivos devem ser baixados novamente.
+
+```json
 {
   "expo": {
     "name": "loginApp",
@@ -54,3 +82,12 @@
     }
   }
 }
+```
+
+---
+Adiconalmente, será necessário adicionar o SHA-1 key para o android com os comandos baixo
+
+```bash
+npx expo prebuild --platform android
+cd android && ./gradlew signingReport
+```
