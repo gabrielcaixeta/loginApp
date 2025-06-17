@@ -1,13 +1,14 @@
-import React, { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
+import React, { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 
 interface Props {
-  data: { titulo: string }[];
-  onEdit: () => void;
-  onDelete: () => void;
+  data: { id: string; titulo: string }[];
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
+
 
 const Item = ({ data, onEdit, onDelete }: Props) => {
   return (
@@ -19,10 +20,10 @@ const Item = ({ data, onEdit, onDelete }: Props) => {
           <View style={styles.item}>
             <Text style={styles.itemText}>{item.titulo}</Text>
             <View style={styles.buttonGroup}>
-              <TouchableOpacity onPress={onEdit} style={styles.button}>
+              <TouchableOpacity onPress={() => onEdit(item.id)} style={styles.button}>
                 <Entypo name="edit" size={24} color="#4A6FA5" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={onDelete} style={styles.button}>
+              <TouchableOpacity onPress={() => onDelete(item.id)} style={styles.button}>
                 <AntDesign name="delete" size={24} color="#E74C3C" />
               </TouchableOpacity>
             </View>
